@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:b="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+    
+
+       <b:bean id="dataSource"
+            class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <b:property name="driverClassName" value="org.postgresql.Driver"/>
+        <b:property name="url" value="jdbc:postgresql://localhost/postgres"/>
+        <b:property name="username" value="postgres"/>
+        <b:property name="password" value="Szpital2018"/>
+    </b:bean>
+    
+    <b:bean id="encoder"
+  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+</b:bean>
+    
+    <http auto-config="false">
+        <!--<access-denied-handler error-page="/error.do"></access-denied-handler>-->
+        <intercept-url pattern="/login" access="permitAll" />
+        <intercept-url pattern="/**" access="admin" />             
+    </http>
+   
+    <authentication-manager>
+        <authentication-provider>                    
+            <!--<jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query=
+		    "select login, 'test', 1 from public.uzytkownicy where login=?"
+                               authorities-by-username-query=
+		    "select login, uprawnienie from public.uzytkownicy where login=?"/>     
+            <password-encoder ref="encoder"/>     -->
+             <user-service>
+            <user name="Admin" password="Admin" authorities="admin" />
+        </user-service>
+        </authentication-provider>    
+            
+    </authentication-manager>
+    
+</b:beans>
