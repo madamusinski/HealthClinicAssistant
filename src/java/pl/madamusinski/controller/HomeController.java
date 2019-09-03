@@ -22,6 +22,7 @@ public class HomeController {
     public String home(){
         return "redirect:/index";
     } 
+    
     @RequestMapping(value ={"/index"}, method=RequestMethod.GET)
     public String index(Model model){
         model.addAttribute("message", "Hello World!");
