@@ -15,14 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Mateusz
  */
 @Controller
-public class UserController {
-    
-    @RequestMapping(value="/user", method=RequestMethod.GET)
-    public ModelAndView user(ModelAndView model) {
+public class PatientController {
+    @RequestMapping(value="/patient", method=RequestMethod.GET)
+    public ModelAndView patient(ModelAndView model) {
         
-        model.addObject("title", "Strona użytkownika");
-        model.addObject("message", "Strona użytkownika");
-        model.setViewName("user");
+        model.addObject("title", "Strona pacjenta");
+        model.addObject("message", "Strona pacjenta");
+        model.setViewName("pacjent");
         return model;
     }
 }

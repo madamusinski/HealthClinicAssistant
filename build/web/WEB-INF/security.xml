@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <b:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:b="http://www.springframework.org/schema/beans" 
+	xmlns:b="http://www.springframework.org/schema/beans"
+        xmlns:context="http://www.springframework.org/schema/context" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 	http://www.springframework.org/schema/security
-	http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     
-
+<!--
        <b:bean id="dataSource"
             class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <b:property name="driverClassName" value="org.postgresql.Driver"/>
         <b:property name="url" value="jdbc:postgresql://localhost/postgres"/>
         <b:property name="username" value="postgres"/>
         <b:property name="password" value="Szpital2018"/>
-    </b:bean>
+    </b:bean>-->
     
-    <b:bean id="encoder"
+   <!-- <b:bean id="encoder"
   class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-</b:bean>
-    
-    <http auto-config="false">
-        <!--<access-denied-handler error-page="/error.do"></access-denied-handler>-->
+</b:bean> -->
+
+    <http auto-config="true" use-expressions="true">
+        <access-denied-handler error-page="/error"></access-denied-handler>
+        
+        
         <intercept-url pattern="/login" access="permitAll" />
-        <intercept-url pattern="/**" access="admin" />             
+        <intercept-url pattern="/index" access="hasAnyRole('user', 'admin')" />
+        <intercept-url pattern="/admin" access="hasRole('admin')"/>
+        <intercept-url pattern="/patient" access="hasRole('patient')"/>  
+        <intercept-url pattern="/user" access="hasRole('user')" />              
     </http>
    
     <authentication-manager>
@@ -36,10 +43,14 @@
 		    "select login, uprawnienie from public.uzytkownicy where login=?"/>     
             <password-encoder ref="encoder"/>     -->
              <user-service>
-            <user name="Admin" password="Admin" authorities="admin" />
+            <user name="admin" password="admin" authorities="admin"/>
+            <user name="user" password="user" authorities="user"/>
+            <user name="patient" password="patient" authorities="patient"/>
         </user-service>
         </authentication-provider>    
             
     </authentication-manager>
+    
+ 
     
 </b:beans>

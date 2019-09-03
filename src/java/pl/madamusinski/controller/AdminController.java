@@ -15,14 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Mateusz
  */
 @Controller
-public class UserController {
-    
-    @RequestMapping(value="/user", method=RequestMethod.GET)
-    public ModelAndView user(ModelAndView model) {
+public class AdminController {
+     @RequestMapping(value="/admin", method=RequestMethod.GET)
+    public ModelAndView admin(ModelAndView model) {
         
-        model.addObject("title", "Strona użytkownika");
-        model.addObject("message", "Strona użytkownika");
-        model.setViewName("user");
+        model.addObject("title", "Strona admina");
+        model.addObject("message", "Strona admina");
+        model.setViewName("admin");
         return model;
     }
 }
