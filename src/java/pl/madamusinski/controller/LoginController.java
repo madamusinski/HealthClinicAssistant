@@ -27,12 +27,22 @@ public class LoginController {
         return model;
     }
     
-    @RequestMapping(value="/error", method=RequestMethod.GET)
-    public ModelAndView error(ModelAndView model) {
+    @RequestMapping(value="/login_error", method=RequestMethod.GET)
+    public ModelAndView loginError(ModelAndView model) {
         
         model.addObject("title", "Blad logowania");
-        model.addObject("message", "Access Denied! Wrong login information!");
-        model.setViewName("error");
+        model.addObject("message", "Blad logowania!");
+        model.setViewName("login_error");
+        
+        return model;
+    }
+    
+       @RequestMapping(value="/access_denied", method=RequestMethod.GET)
+    public ModelAndView accessDenied(ModelAndView model) {
+        
+        model.addObject("title", "Dostęp zabroniony!");
+        model.addObject("message", "Access Denied! No permission to access this site!");
+        model.setViewName("access_denied");
         
         return model;
     }

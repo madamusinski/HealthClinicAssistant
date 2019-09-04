@@ -1,5 +1,5 @@
 <%-- 
-    Document   : error
+    Document   : access_denied
     Created on : 2019-09-03, 19:34:09
     Author     : Mateusz
 --%>
@@ -10,10 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Access Deniedssssss</title>
+        <title>${title}</title>
     </head>
     <body>
         <h1>Access Denied! ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</h1>
-        <p><a href="<c:url value='/login'></c:url>>Try logging in again...</a></p>
+        <h1>${message}</h1>
+
     </body>
 </html>

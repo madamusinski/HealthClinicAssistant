@@ -24,15 +24,20 @@
 </b:bean> -->
 
     <http auto-config="false" use-expressions="true">
-        <access-denied-handler error-page="/error"/>    
+        <access-denied-handler error-page="/access_denied"/>    
         <intercept-url pattern="/login" access="permitAll" />
-        <intercept-url pattern="/error" access="permitAll" />
-        <intercept-url pattern="/index" access="hasAnyRole('user', 'admin')"/>
+        <intercept-url pattern="/login_error" access="permitAll" />
+       <!-- <intercept-url pattern="/index" access="hasAnyRole('user', 'admin')"/>-->
+        <intercept-url pattern="/index" access="hasRole('user')"/>
         <intercept-url pattern="/admin" access="hasRole('admin')"/>
         <intercept-url pattern="/patient" access="hasRole('patient')"/>  
         <intercept-url pattern="/user" access="hasRole('user')"/>
         
-        <form-login login-page="/login" default-target-url="/patient" authentication-failure-url="/error"/>
+        <form-login login-page="/login" default-target-url="/patient" authentication-failure-url="/login_error"
+        login-processing-url="/j_spring_security_check"
+         username-parameter="j_username"
+          password-parameter="j_password"
+        />
         <logout logout-success-url="/login"/>            
     </http>
    
