@@ -21,7 +21,7 @@ public class PatientController {
         
         model.addObject("title", "Strona pacjenta");
         model.addObject("message", "Strona pacjenta");
-        model.setViewName("pacjent");
+        model.setViewName("patient");
         return model;
     }
 }

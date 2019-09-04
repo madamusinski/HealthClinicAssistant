@@ -19,13 +19,13 @@
 	<p>Invalid username / password</p>
         </c:if>
         
-<c:url var="loginUrl" value="/login"/> 
+<c:url var="loginUrl" value="/j_spring_security_check"/> 
 <form action="${loginUrl}" method="post">
 	<p><label for="username">User:</label></p>
-	<input type="text" id="username" name="username"/> 
+	<input type="text" id="username" name="j_username"/> 
 
 	<p><label for="password">Password:</label></p>
-	<input type="password" id="password" name="password"> 
+	<input type="password" id="password" name="j_password"> 
 
 	<div>
 		<input name="submit" type="submit"/>

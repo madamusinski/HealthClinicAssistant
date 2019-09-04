@@ -13,7 +13,9 @@
         <title>${title}</title>
     </head>
     <body>
-        
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <p>Witaj ${pageContext.request.userPrincipal.name}</p><a href="<c:url value='/j_spring_security_logout'>     
+        </c:url>">Wyloguj się</a></c:if>
         <h1>Welcome to ${message}</h1>
     </body>
 </html>
