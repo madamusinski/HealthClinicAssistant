@@ -24,13 +24,17 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="user">Strefa pracownika<span class="sr-only">(current)</span></a>
                 </li>
+                <c:if test="${pageContext.request.isUserInRole('Administrator')}">
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/admin">Panel Administratora</a>
-                </li>
+                </li>    
+                </c:if>
+               
                 <li class="nav-item">
                     <a class="nav-link" href="patient">Portal pacjenta</a>
                 </li>
-                <c:if test="${pageContext.request.userPrincipal.name != null}"></c:if>
+                
+                
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value='/j_spring_security_logout'></c:url>" tabindex="-1">Wyloguj się</a>
                 </li>
