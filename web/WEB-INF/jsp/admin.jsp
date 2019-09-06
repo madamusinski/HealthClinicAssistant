@@ -18,9 +18,39 @@
  
     </head>
     <body>
+            <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="user">Strefa pracownika<span class="sr-only">(current)</span></a>
+                </li>
+                <c:if test="${pageContext.request.isUserInRole('Administrator')}">
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin">Panel Administratora</a>
+                </li>    
+                </c:if>
+                <li class="nav-item active">
+                    <a class="nav-link" href="admin/user_panel">Zarzadzaj uzytkownikami</a>
+                </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="patient">Portal pacjenta</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value='/j_spring_security_logout'></c:url>" tabindex="-1">Wyloguj się</a>
+                </li>
+            </ul>
+  </div>
+</nav>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <p>Witaj ${pageContext.request.userPrincipal.name}</p><a href="<c:url value='/j_spring_security_logout'>     
-        </c:url>">Wyloguj się</a></c:if>
+            <p>Witaj ${pageContext.request.userPrincipal.name}</p></c:if>
         <h1>Welcome to ${message}</h1>
     </body>
 </html>

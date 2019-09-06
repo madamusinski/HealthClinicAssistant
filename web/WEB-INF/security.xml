@@ -11,13 +11,7 @@
 
     
 
-       <b:bean id="dataSource"
-            class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <b:property name="driverClassName" value="org.postgresql.Driver"/>
-        <b:property name="url" value="jdbc:postgresql://localhost/HealthClinicAssistant"/>
-        <b:property name="username" value="postgres"/>
-        <b:property name="password" value="Cir01010"/>
-    </b:bean>
+       
     
    <!-- <b:bean id="encoder"
   class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
@@ -29,7 +23,7 @@
         <intercept-url pattern="/login_error" access="permitAll" />
        <!-- <intercept-url pattern="/index" access="hasAnyRole('user', 'admin')"/>-->
         <intercept-url pattern="/index" access="hasAnyRole('Uzytkownik', 'Administrator', 'Lekarz', 'Pielegniarka', 'Rejestratorka')"/>
-        <intercept-url pattern="/admin" access="hasRole('Administrator')"/>
+        <intercept-url pattern="/admin/**" access="hasRole('Administrator')"/>
         <intercept-url pattern="/patient" access="hasAnyRole('Pacjent', 'Administrator')"/>  
         <intercept-url pattern="/user" access="hasAnyRole('Uzytkownik', 'Administrator', 'Lekarz', 'Pielegniarka', 'Rejestratorka')"/>
         

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Mateusz
  */
+
 @Controller
 public class AdminController {
      @RequestMapping(value="/admin", method=RequestMethod.GET)
@@ -22,6 +23,15 @@ public class AdminController {
         model.addObject("title", "Strona admina");
         model.addObject("message", "Strona admina");
         model.setViewName("admin");
+        return model;
+    }
+    
+    @RequestMapping(value="/admin/user_panel", method=RequestMethod.GET)
+    public ModelAndView userPanel(ModelAndView model) {
+        
+        model.addObject("title", "test admin panel");
+        model.addObject("message", "test admin panel");
+        model.setViewName("user_panel");
         return model;
     }
 }
