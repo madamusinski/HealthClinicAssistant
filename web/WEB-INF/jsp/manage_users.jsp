@@ -1,7 +1,7 @@
 <%-- 
-    Document   : admin
-    Created on : 2019-09-02, 20:34:54
-    Author     : Mateusz
+    Document   : manage_users
+    Created on : 2019-09-06, 10:01:04
+    Author     : maadamusinski
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,7 +20,7 @@
     <body>
             <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="index">Home</a>
+            <a class="navbar-brand" href="../index">Home</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
