@@ -26,12 +26,12 @@ public class AdminController {
         return model;
     }
     
-    @RequestMapping(value="/admin/user_panel", method=RequestMethod.GET)
+    @RequestMapping(value="/admin/manage_users", method=RequestMethod.GET)
     public ModelAndView userPanel(ModelAndView model) {
         
-        model.addObject("title", "test admin panel");
-        model.addObject("message", "test admin panel");
-        model.setViewName("user_panel");
+        model.addObject("title", "Panel Administratora - zarządzaj użytkownikami");
+        model.addObject("message", "Ekran zarządzania użytkownikami");
+        model.setViewName("manage_users");
         return model;
     }
 }
