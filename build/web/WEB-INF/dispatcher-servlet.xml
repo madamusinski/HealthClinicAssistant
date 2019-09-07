@@ -28,6 +28,7 @@
             <beans:property name="annotatedClasses">
              <beans:list>
                  <beans:value>pl.madamusinski.model.Users</beans:value>
+                 <beans:value>pl.madamusinski.model.Wizyta</beans:value>
              </beans:list>
          </beans:property>
          <beans:property name="hibernateProperties">
@@ -40,18 +41,29 @@
          </beans:property>
      </beans:bean>
      
-    <!-- Definicja fasolki klasy OddzialDAO-->
+    <!-- Definicja fasolki klasy UsersDAO-->
     
      <beans:bean id="usersDAO" class="pl.madamusinski.dao.UsersDAOImpl">
          <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
      </beans:bean>
      
-     <!-- Definicja fasolki klasy OddzialService-->
+     <!-- Definicja fasolki klasy UsersService-->
     
      <beans:bean id="usersService" class="pl.madamusinski.service.UsersServiceImpl">
          <beans:property name="usersDAO" ref="usersDAO"></beans:property>
      </beans:bean>
      
+     <!-- Definicja fasolki klasy WizytaDAO-->
+    
+     <beans:bean id="wizytaDAO" class="pl.madamusinski.dao.WizytaDAOImpl">
+         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+     </beans:bean>
+     
+     <!-- Definicja fasolki klasy WizytaService-->
+    
+     <beans:bean id="wizytaService" class="pl.madamusinski.service.WizytaServiceImpl">
+         <beans:property name="wizytaDAO" ref="wizytaDAO"></beans:property>
+     </beans:bean>
      <tx:annotation-driven transaction-manager="transactionManager"/>
      
      <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

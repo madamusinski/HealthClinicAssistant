@@ -9,7 +9,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import pl.madamusinski.dao.UsersDAO;
-import pl.madamusinski.dao.UsersDAOImpl;
 import pl.madamusinski.model.Users;
 
 /**

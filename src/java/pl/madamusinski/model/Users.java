@@ -35,7 +35,12 @@ public class Users implements Serializable {
     
     public Users() {}
     
-    public Users(String login, String password, boolean active) {
+    public Users(int id, boolean active) {
+        this.id = id;
+        this.active = active;
+    }
+    public Users(int id, String login, boolean active) {
+        this.id = id;
         this.login = login;
         //this.password = password;
         this.active = active;
@@ -74,9 +79,9 @@ public class Users implements Serializable {
     }
     
     public String toString(){
-        return "[id_oddzial=" + id
-               + ", nazwa=" + login
-               //+ ", firma=" + password
+        return "[id=" + id
+               + ", login=" + login
+               //+ ", haslo=" + password
                + ", aktywny=" + active
                + "]";
     }

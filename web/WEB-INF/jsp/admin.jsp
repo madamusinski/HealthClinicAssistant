@@ -37,7 +37,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="admin/manage_users">Zarzadzaj uzytkownikami</a>
                 </li>
-               
+                 <li class="nav-item">
+                    <a class="nav-link" href="user/wizyty">Wizyty</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="patient">Portal pacjenta</a>
                 </li>

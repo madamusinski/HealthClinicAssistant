@@ -76,10 +76,10 @@ public class AdminController {
     @ResponseBody
     public List<Users> getAllUsersNew() {
         logger.debug("Kontroler poprawnie zakonczył pobieranie użytkowników NEW");
-       /** List<Users> list = usersService.getAllUsersNew();
+        List<Users> list = usersService.getAllUsersNew();
         for(Users u : list){
-            System.out.println(u.getId() + ", " + u.getActive());
-        }*/
+            System.out.println(u.toString());
+        }
         return usersService.getAllUsersNew();
         
     }

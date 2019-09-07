@@ -1,5 +1,5 @@
 <%-- 
-    Document   : manage_users
+    Document   : wizyty
     Created on : 2019-09-06, 10:01:04
     Author     : maadamusinski
 --%>
@@ -23,20 +23,38 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
 
    </head>
     <!-- skrytpy -->
     <script>
         $(document).ready(function(){
+            var dzien
+            var godz;
            $('#table_id').DataTable({
                ajax: {
-                   url: "${pageContext.request.contextPath}/admin/manage_users/get_all_users_new_json",
+                   url: "${pageContext.request.contextPath}/user/wizyty/get_wizyty_json",
                    dataSrc: ""
                }, 
                "columns" : [
-                   {"data":"id"},
-                   {"data":"login"},
-                   {"data":"active"},
+                  
+                   {"data":"dataCzas",
+                       "render" : function(data, type, row){
+                           //return new Date(data).toISOString().slice(0, 19);
+                           
+                           godz = new Date(data).toLocaleTimeString();
+                           dzien = new Date(data).toLocaleDateString();
+                           console.log(dzien);
+                           console.log(godz);
+                           $('#dzien').text("Wizyty w dniu " + dzien);
+                           //return new Date(data).toLocaleString()
+                           return godz;
+                           
+                       }
+                           
+                    }, 
+                    //{"data":"dataCzas"},
+                   {"data":"pacjent"},
                    {
                      "data":"edit",
                      "render" : function(data, type, row, meta) {
@@ -72,6 +90,7 @@
                         }
              }
            }); 
+       
         });
     </script>
     <body>
@@ -89,12 +108,13 @@
                 <c:if test="${pageContext.request.isUserInRole('Administrator')}">
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/admin">Panel Administratora</a>
-                </li>    
-                </c:if>
+                </li>  
                 <li class="nav-item active">
                     <a class="nav-link" href="admin/manage_users">Zarzadzaj uzytkownikami</a>
                 </li>
-                 <li class="nav-item">
+                </c:if>
+                
+                <li class="nav-item">
                     <a class="nav-link" href="user/wizyty">Wizyty</a>
                 </li>
                 <li class="nav-item">
@@ -111,14 +131,13 @@
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <p>Witaj ${pageContext.request.userPrincipal.name}</p></c:if>
             <h1>Welcome to ${message}</h1>
-                    <p>All users list:</p>
+                    <p id="dzien">All users list:</p>
                     <div>
                         <table id="table_id" class="display">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Login</th>
-                                    <th>Aktywny</th>
+                                    <th>Data i Czas</th>
+                                    <th>Pacjent</th>
                                     <th>Edytuj</th>
                                     <th>Usuń</th>                                 
                                 </tr>
