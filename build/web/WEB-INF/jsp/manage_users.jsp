@@ -8,17 +8,74 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>${title}</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
- 
-    </head>
+         <script type="text/javascript" language="javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        
+        
+     <!--   <script type="text/javascript" language="javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>-->
+        <script type="text/javascript" language="javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+   </head>
+    <!-- skrytpy -->
+    <script>
+        $(document).ready(function(){
+           $('#table_id').DataTable({
+               ajax: {
+                   url: "${pageContext.request.contextPath}/admin/manage_users/get_all_users_json",
+                   dataSrc: ""
+               }, 
+               "columns" : [
+                   {"data":"id"},
+                   {"data":"login"},
+                   {"data":"active"},
+                   {
+                     "data":"edit",
+                     "render" : function(data, type, row, meta) {
+                         return "Edytuj";
+                     } 
+                },
+                {
+                    "data":"delete",
+                    "render" : function(data, type, row, meta) {
+                        return "Usuń";
+                    }
+                }
+               ], "language": {
+                        "processing":     "Przetwarzanie...",
+                        "search":         "Szukaj:",
+                        "lengthMenu":     "Pokaż _MENU_ pozycji",
+                        "info":           "Pozycje od _START_ do _END_ z _TOTAL_ łącznie",
+                        "infoEmpty":      "Pozycji 0 z 0 dostępnych",
+                        "infoFiltered":   "(filtrowanie spośród _MAX_ dostępnych pozycji)",
+                        "infoPostFix":    "",
+                        "loadingRecords": "Wczytywanie...",
+                        "zeroRecords":    "Nie znaleziono pasujących pozycji",
+                        "emptyTable":     "Brak danych",
+                        "paginate": {
+                            "first":      "Pierwsza",
+                            "previous":   "Poprzednia",
+                            "next":       "Następna",
+                            "last":       "Ostatnia"
+                        },
+                        "aria": {
+                            "sortAscending": ": aktywuj, by posortować kolumnę rosnąco",
+                            "sortDescending": ": aktywuj, by posortować kolumnę malejąco"
+                        }
+             }
+           }); 
+        });
+    </script>
     <body>
-            <body>
+            
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="../index">Home</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,6 +108,21 @@
 </nav>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <p>Witaj ${pageContext.request.userPrincipal.name}</p></c:if>
-        <h1>Welcome to ${message}</h1>
+            <h1>Welcome to ${message}</h1>
+                    <p>All users list:</p>
+                    <div>
+                        <table id="table_id" class="display">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Login</th>
+                                    <th>Aktywny</th>
+                                    <th>Edytuj</th>
+                                    <th>Usuń</th>                                 
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
     </body>
+    
 </html>

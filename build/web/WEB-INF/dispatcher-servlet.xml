@@ -9,7 +9,7 @@
        
     <annotation-driven/>
     <!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>-->
-    <context:component-scan base-package="pl.madamusinski.controller"/>
+    <context:component-scan base-package="pl.madamusinski"/>
     <!--
     <resources mapping="/resources/**" location="/resources/" />
     -->
@@ -20,5 +20,47 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
         
+        
+     <!-- Hibernate 4 SessionFactory bean definition -->
+     <beans:bean id="hibernate4AnnotatedSessionFactory" 
+         class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+         <beans:property name="dataSource" ref="dataSource" />
+            <beans:property name="annotatedClasses">
+             <beans:list>
+                 <beans:value>pl.madamusinski.model.Users</beans:value>
+             </beans:list>
+         </beans:property>
+         <beans:property name="hibernateProperties">
+             <beans:props>
+                 <beans:prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</beans:prop>
+                 <beans:prop key="hibernate.show_sql">true</beans:prop>
+                 <beans:prop key="hbm2ddl.auto">update</beans:prop>
+                 <!--<beans:prop key="hibernate.format_sql">true</beans:prop>-->
+             </beans:props>
+         </beans:property>
+     </beans:bean>
+     
+    <!-- Definicja fasolki klasy OddzialDAO-->
+    
+     <beans:bean id="usersDAO" class="pl.madamusinski.dao.UsersDAOImpl">
+         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+     </beans:bean>
+     
+     <!-- Definicja fasolki klasy OddzialService-->
+    
+     <beans:bean id="usersService" class="pl.madamusinski.service.UsersServiceImpl">
+         <beans:property name="usersDAO" ref="usersDAO"></beans:property>
+     </beans:bean>
+     
+     <tx:annotation-driven transaction-manager="transactionManager"/>
+     
+     <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+     </beans:bean>
+    <!--
+    Most controllers will use the ControllerClassNameHandlerMapping above, but
+    for the index controller we are using ParameterizableViewController, so we must
+    define an explicit mapping for it.
+    -->
         
 </beans:beans>
