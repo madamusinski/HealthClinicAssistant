@@ -39,7 +39,8 @@ public class WizytaDAOImpl implements WizytaDAO{
         Session session = sessionFactory.getCurrentSession();
         //Query sql = session.createQuery("select new Wizyta(w.id, to_timestamp(w.dataCzas, 'DD-MM-YYYY'), w.pacjent) FROM Wizyta w ");
         Query sql = session.createSQLQuery("select id, data_czas, pacjent from wizyta where data_czas > to_timestamp('13.09.2019', 'DD.MM.YYYY ') AND data_czas < to_timestamp('14.09.2019', 'DD.MM.YYYY')").addEntity(Wizyta.class);
-        //sql.setResultTransformer(RootEntityResultTransformer.INSTANCE);
+        //Query sql = session.createSQLQuery("select id, data_czas, pacjent from wizyta").addEntity(Wizyta.class);
+//sql.setResultTransformer(RootEntityResultTransformer.INSTANCE);
         List<Wizyta> listWizyta = sql.list();
         for(Wizyta w : listWizyta) {
             System.out.println(w.getDataCzas().getTime());

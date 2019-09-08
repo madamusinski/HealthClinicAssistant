@@ -5,6 +5,7 @@
  */
 package pl.madamusinski.controller;
 
+import java.security.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,8 @@ public class HomeController {
     } 
     
     @RequestMapping(value ={"/index"}, method=RequestMethod.GET)
-    public String index(Model model){
+    public String index(Model model, Principal p){
+        model.addAttribute("user", p.getName());
         model.addAttribute("message", "Hello World!");
         return "index";
     } 

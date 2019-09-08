@@ -31,7 +31,7 @@
         $(document).ready(function(){
             var dzien
             var godz;
-           $('#table_id').DataTable({
+          var table = $('#table_id').DataTable({
                ajax: {
                    url: "${pageContext.request.contextPath}/user/wizyty/get_wizyty_json",
                    dataSrc: ""
@@ -39,7 +39,7 @@
                "columns" : [
                   
                    {"data":"dataCzas",
-                       "render" : function(data, type, row){
+                       "render" : function(data, type, full){
                            //return new Date(data).toISOString().slice(0, 19);
                            
                            godz = new Date(data).toLocaleTimeString();
@@ -57,8 +57,8 @@
                    {"data":"pacjent"},
                    {
                      "data":"edit",
-                     "render" : function(data, type, row, meta) {
-                         return "Edytuj";
+                     "render" : function(data, type, full, meta) {
+                         return full.id;
                      } 
                 },
                 {
@@ -90,7 +90,15 @@
                         }
              }
            }); 
-       
+           
+           $('#dodajWizyta').click(function(){
+            $('#addWizyta').modal();
+           });
+           
+           $('#edytujWizyta').click(function(){
+              $('#editWizyta').modal();
+           });
+           
         });
     </script>
     <body>
@@ -128,10 +136,113 @@
             </ul>
   </div>
 </nav>
+        <!--Okienko dodawania-->
+        <div class="container">
+            <div class="modal fade" id="addWizyta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title">Dodaj Wizytę</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            
+                        </div>
+                        <div class="modal-body mx-3">
+                            <form id="addform" method="POST" accept-charset="UTF-8">    
+                                
+                                <input id="addId" type="hidden" path="id" name="id">
+                                <div class="md-form mb-4">
+                                <label for="addDataCzas" class="col-form-label">Dodaj godzinę:</label>
+                                <br>
+                                <input id="addDataCzas" type="text" name="dataCzas">
+                                </div>
+                                <div class="md-form mb-4">
+                                <label for="pacjent" class="col-form-label">Podaj nazwisko i imię pacjenta:</label>
+                                <br>
+                                <input id="pacjent" type="text" name="pacjent">
+                                </div>
+                                <br>
+                                <input class="btn btn-default" type="submit" value="addWizyta">
+                            </form>
+                            </div>
+                            <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Okienko edytowania-->
+        <div class="container">
+            <div class="modal fade" id="editWizyta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title">Edytowanie Wizyty</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            
+                        </div>
+                        <div class="modal-body mx-3">
+                            <form id="editform" method="POST" accept-charset="UTF-8">    
+                                
+                                <input id="editId" type="hidden" path="id" name="id">
+                                <div class="md-form mb-4">
+                                <label for="editDataCzas" class="col-form-label">Czas wizyty:</label>
+                                <br>
+                                <input id="editDataCzas" type="text" name="dataCzas">
+                                </div>
+                                <div class="md-form mb-4">
+                                <label for="pacjent" class="col-form-label">Pacjent:</label>
+                                <br>
+                                <input id="pacjent" type="text" name="pacjent">
+                                </div>
+                                <br>
+                                <input class="btn btn-default" type="submit" value="addWizyta">
+                            </form>
+                            </div>
+                            <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Okienko usuwania-->
+        <div class="container">
+            <div class="modal fade" id="addWizyta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title">Dodaj Wizytę</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            
+                        </div>
+                        <div class="modal-body mx-3">
+                            <form id="addform" method="POST" accept-charset="UTF-8">    
+                                
+                                <input id="addId" type="hidden" path="id" name="id">
+                                <div class="md-form mb-4">
+                                <label for="addDataCzas" class="col-form-label">Dodaj godzinę:</label>
+                                <br>
+                                <input id="addDataCzas" type="text" name="dataCzas">
+                                </div>
+                                <div class="md-form mb-4">
+                                <label for="pacjent" class="col-form-label">Podaj nazwisko i imię pacjenta:</label>
+                                <br>
+                                <input id="pacjent" type="text" name="pacjent">
+                                </div>
+                                <br>
+                                <input class="btn btn-default" type="submit" value="addWizyta">
+                            </form>
+                            </div>
+                            <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <p>Witaj ${pageContext.request.userPrincipal.name}</p></c:if>
             <h1>Welcome to ${message}</h1>
                     <p id="dzien">All users list:</p>
+                    <a class="btn btn-primary" id="dodajWizyta" action="" href="#" role="button">Dodaj wizytę</a>
                     <div>
                         <table id="table_id" class="display">
                             <thead>

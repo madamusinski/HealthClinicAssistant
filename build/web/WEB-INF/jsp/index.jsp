@@ -43,9 +43,10 @@
             </ul>
   </div>
 </nav>
-        
+                
+             
             <p>Witaj ${pageContext.request.userPrincipal.name}</p>     
-
+                    <p>Witaj to leci z ModelAndView uzytkowniku = ${user}</p>
         
         <p>${message}</p>
     </body>
