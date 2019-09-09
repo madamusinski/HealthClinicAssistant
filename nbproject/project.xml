@@ -39,19 +39,23 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.postgresql-42.2.6.jar-1}</file>
+                    <file>${file.reference.postgresql-42.2.6.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.spring-security-config-3.2.5.RELEASE.jar-1}</file>
+                    <file>${file.reference.spring-security-config-3.2.5.RELEASE.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.spring-security-core-3.2.5.RELEASE.jar-1}</file>
+                    <file>${file.reference.spring-security-core-3.2.5.RELEASE.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.spring-security-web-3.2.5.RELEASE.jar-1}</file>
+                    <file>${file.reference.spring-security-web-3.2.5.RELEASE.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.gson-2.3.1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

@@ -14,7 +14,7 @@
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://localhost/HealthClinicAssistant"/>
         <property name="username" value="postgres"/>
-        <property name="password" value="Cir01010"/>
+        <property name="password" value="Szpital2019"/>
     </bean>
     
 

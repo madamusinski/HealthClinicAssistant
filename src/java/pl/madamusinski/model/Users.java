@@ -27,9 +27,9 @@ public class Users implements Serializable {
     private int id;
     @Column(name="login", nullable=false)
     private String login;
-    /**@Transient
+    //@Transient
     @Column(name="password", nullable=false)
-    private String password;*/
+    private String password;
     @Column(name="active", nullable=false)
     private boolean active;
     
@@ -42,7 +42,7 @@ public class Users implements Serializable {
     public Users(int id, String login, boolean active) {
         this.id = id;
         this.login = login;
-        //this.password = password;
+        this.password = password;
         this.active = active;
     }
     
@@ -61,14 +61,14 @@ public class Users implements Serializable {
     public void setLogin(String login) {
         this.login = login;
     }
-   /** 
+    
     public String getPassword() {
         return password;
     }
     
     public void setPassword() {
         this.password = password;
-    }*/
+    }
     
     public boolean getActive() {
         return active;

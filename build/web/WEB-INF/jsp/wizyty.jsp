@@ -121,14 +121,14 @@
                });
               
            });
-           $('#addCzas').click(function(){
+         /**  $('#addCzas').click(function(){
                var test = $('#addCzas option:selected').text();
                console.log(test);
-           });
+           });*/
           $("addform").submit(function(event){
-              event.preventDefault();
-              var test = $('#addCzas').val();
-              alert(test);
+              //event.preventDefault();
+              var test = $('#addCzas option:selected').text();
+             $('#dzien').text(test);
           });
            
            
@@ -180,7 +180,7 @@
                             
                         </div>
                         <div class="modal-body mx-3">
-                            <form id="addform" method="POST" accept-charset="UTF-8">    
+                            <form id="addform"  accept-charset="UTF-8">    
                                 
                                 <input id="addId" type="hidden" path="id" name="id">
                                 <div class="md-form mb-4">

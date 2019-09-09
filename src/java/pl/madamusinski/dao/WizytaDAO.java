@@ -14,4 +14,5 @@ import pl.madamusinski.model.Wizyta;
  */
 public interface WizytaDAO {
     public List<Wizyta> getAllWizyta();
+    public void addWizyta(Wizyta w);
 }

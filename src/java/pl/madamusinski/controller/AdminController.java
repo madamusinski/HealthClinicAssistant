@@ -5,15 +5,21 @@
  */
 package pl.madamusinski.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import pl.madamusinski.model.Users;
 import pl.madamusinski.service.UsersService;
@@ -82,5 +88,17 @@ public class AdminController {
         }
         return usersService.getAllUsersNew();
         
+    }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value="/admin/manage_users/add_user", method=RequestMethod.POST
+            , consumes="application/json; charset=UTF-8")
+    public void addUser(@RequestBody String form, ModelAndView m) {
+       // logger.debug("Wchodze na strone dodawania uzytkownika");
+        Gson gson = new GsonBuilder().create();
+        Users u = gson.fromJson(form, Users.class);
+        this.usersService.addUser(u);
+        //m.addObject("title", "Dodawania użytkownika");
+       
     }
 }

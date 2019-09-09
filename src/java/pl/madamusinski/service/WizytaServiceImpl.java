@@ -32,5 +32,13 @@ public class WizytaServiceImpl implements WizytaService{
     public List<Wizyta> getAllWizyta() {
         return wizytaDao.getAllWizyta();
     }
+
+    @Override
+    @Transactional
+    public void addWizyta(Wizyta w) {
+        this.wizytaDao.addWizyta(w); //To change body of generated methods, choose Tools | Templates.
+    }
     
+    
+
 }
