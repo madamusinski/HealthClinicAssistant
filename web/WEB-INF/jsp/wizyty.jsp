@@ -19,11 +19,17 @@
         <script type="text/javascript" language="javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
+          <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+         
+         <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
 
    </head>
     <!-- skrytpy -->
@@ -38,7 +44,7 @@
                }, 
                "columns" : [
                   
-                   {"data":"dataCzas",
+                  /** {"data":"dataWizyta",
                        "render" : function(data, type, full){
                            //return new Date(data).toISOString().slice(0, 19);
                            
@@ -52,7 +58,9 @@
                            
                        }
                            
-                    }, 
+                    },*/
+                    {"data":"dataWizyta"},
+                    {"data":"czasWizyta"},
                     //{"data":"dataCzas"},
                    {"data":"pacjent"},
                    {
@@ -98,6 +106,31 @@
            $('#edytujWizyta').click(function(){
               $('#editWizyta').modal();
            });
+           $(function(){
+               $('#addData').datepicker({
+                   dateFormat: 'yy-mm-dd',
+                   beforeShowDay: function(date){ 
+                       if(date.getDay() == 6 || date.getDay() == 0){
+                           return [false, ""];
+                       } else {
+                           return [true, ""];
+                       }
+                           
+                   }
+                   
+               });
+              
+           });
+           $('#addCzas').click(function(){
+               var test = $('#addCzas option:selected').text();
+               console.log(test);
+           });
+          $("addform").submit(function(event){
+              event.preventDefault();
+              var test = $('#addCzas').val();
+              alert(test);
+          });
+           
            
         });
     </script>
@@ -151,17 +184,47 @@
                                 
                                 <input id="addId" type="hidden" path="id" name="id">
                                 <div class="md-form mb-4">
-                                <label for="addDataCzas" class="col-form-label">Dodaj godzinę:</label>
+                                <label for="addData" class="col-form-label">Dodaj datę:</label>
                                 <br>
-                                <input id="addDataCzas" type="text" name="dataCzas">
+                                <input id="addData" type="text" name="data" class="form-control">
                                 </div>
+                                <div class="md-form mb-4">
+                                <label for="addCzas" class="col-form-label">Dodaj godzinę:</label>
+                                <br>
+                                <div class="input-group mb-3">
+                                <select id="addCzasz" class="custom-select">
+                                    <option selected>Wybierz godzinę</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:00">08:15</option>
+                                    <option value="08:00">08:30</option>
+                                    <option value="08:00">08:45</option>
+                                    <option value="08:00">09:00</option>
+                                    <option value="08:00">09:15</option>
+                                    <option value="08:00">09:30</option>
+                                    <option value="08:00">09:45</option>
+                                    <option value="08:00">10:00</option>
+                                    <option value="08:00">10:15</option>
+                                    <option value="08:00">10:30</option>
+                                    <option value="08:00">10:45</option>
+                                    <option value="08:00">11:00</option>
+                                    <option value="08:00">11:15</option>
+                                    <option value="08:00">11:30</option>
+                                    <option value="08:00">11:45</option>
+                                    <option value="08:00">12:00</option>
+                                    <option value="08:00">12:15</option>
+                                    <option value="08:00">12:30</option>
+                                    <option value="08:00">12:45</option>
+                                    
+                                </select>
+                                </div>
+                               </div>
                                 <div class="md-form mb-4">
                                 <label for="pacjent" class="col-form-label">Podaj nazwisko i imię pacjenta:</label>
                                 <br>
-                                <input id="pacjent" type="text" name="pacjent">
+                                <input id="pacjent" type="text" name="pacjent" class="form-control">
                                 </div>
                                 <br>
-                                <input class="btn btn-default" type="submit" value="addWizyta">
+                                <input class="btn btn-default" type="submit" value="Dodaj">
                             </form>
                             </div>
                             <div class="modal-footer">
@@ -241,13 +304,15 @@
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <p>Witaj ${pageContext.request.userPrincipal.name}</p></c:if>
             <h1>Welcome to ${message}</h1>
+                   
                     <p id="dzien">All users list:</p>
                     <a class="btn btn-primary" id="dodajWizyta" action="" href="#" role="button">Dodaj wizytę</a>
                     <div>
                         <table id="table_id" class="display">
                             <thead>
                                 <tr>
-                                    <th>Data i Czas</th>
+                                    <th>Data</th>
+                                    <th>Czas</th>
                                     <th>Pacjent</th>
                                     <th>Edytuj</th>
                                     <th>Usuń</th>                                 

@@ -27,9 +27,13 @@ public class Wizyta implements Serializable {
     @Id @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="data_czas", nullable=false)
-    private Date dataCzas;
+    @Temporal(TemporalType.DATE)
+    @Column(name="data_wizyta", nullable=false)
+    private Date dataWizyta;
+    
+    @Temporal(TemporalType.TIME)
+    @Column(name="czas_wizyta", nullable=false)
+    private Date czasWizyta; 
     
     /**@Transient
     @Column(name="password", nullable=false)
@@ -39,9 +43,10 @@ public class Wizyta implements Serializable {
     
     public Wizyta() {}
     
-    public Wizyta(int id,  Date dataCzas, String pacjent) {
+    public Wizyta(int id,  Date dataWizyta, Date czasWizyta, String pacjent) {
         this.id = id;
-        this.dataCzas = dataCzas;
+        this.dataWizyta = dataWizyta;
+        this.czasWizyta = czasWizyta;
         this.pacjent = pacjent;
     }
   
@@ -55,12 +60,20 @@ public class Wizyta implements Serializable {
     }
     
     
-    public Date getDataCzas() {
-        return dataCzas;
+    public Date getDataWizyta() {
+        return dataWizyta;
     }
     
-    public void setDataCzas(Date dataCzas) {
-        this.dataCzas = dataCzas;
+    public void setDataWizyta(Date dataWizyta) {
+        this.dataWizyta = dataWizyta;
+    }
+    
+    public Date getCzasWizyta() {
+        return czasWizyta;
+    }
+    
+    public void setCzasWizyta(Date czasWizyta) {
+        this.czasWizyta = czasWizyta;
     }
    
     public String getPacjent() {
@@ -74,7 +87,8 @@ public class Wizyta implements Serializable {
     
     public String toString(){
         return "[id=" + id
-               + ", dataCzas=" + dataCzas
+               + ", data=" + dataWizyta
+                + ", czas=" + czasWizyta
                //+ ", haslo=" + password
                + ", pacjent=" + pacjent
                + "]";
