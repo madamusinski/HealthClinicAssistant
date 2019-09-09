@@ -5,12 +5,14 @@
  */
 package pl.madamusinski.model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -18,23 +20,29 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="users", schema="public")
-public class Users {
+public class Users implements Serializable {
     
     @Id @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     @Column(name="login", nullable=false)
     private String login;
+    /**@Transient
     @Column(name="password", nullable=false)
-    private String password;
+    private String password;*/
     @Column(name="active", nullable=false)
     private boolean active;
     
     public Users() {}
     
-    public Users(String login, String password, boolean active) {
+    public Users(int id, boolean active) {
+        this.id = id;
+        this.active = active;
+    }
+    public Users(int id, String login, boolean active) {
+        this.id = id;
         this.login = login;
-        this.password = password;
+        //this.password = password;
         this.active = active;
     }
     
@@ -53,14 +61,14 @@ public class Users {
     public void setLogin(String login) {
         this.login = login;
     }
-    
+   /** 
     public String getPassword() {
         return password;
     }
     
     public void setPassword() {
         this.password = password;
-    }
+    }*/
     
     public boolean getActive() {
         return active;
@@ -71,9 +79,9 @@ public class Users {
     }
     
     public String toString(){
-        return "[id_oddzial=" + id
-               + ", nazwa=" + login
-               + ", firma=" + password
+        return "[id=" + id
+               + ", login=" + login
+               //+ ", haslo=" + password
                + ", aktywny=" + active
                + "]";
     }

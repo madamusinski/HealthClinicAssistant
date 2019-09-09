@@ -5,6 +5,9 @@
  */
 package pl.madamusinski.dao;
 
+import java.util.List;
+import org.hibernate.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -48,7 +51,43 @@ public class UsersDAOImpl implements UsersDAO{
         Session session = sessionFactory.getCurrentSession();
         Users u = (Users)session.load(Users.class, id);
         if(u != null) {
+            
             session.delete(u);
+            logger.info("Deleted succesfuly user with id="+ id);
+            System.out.println("Deleted succesfuly user with id="+ id);
+        } else {
+            logger.info("Cannot delete user of given id=" + id +", because that user is null");
+            System.out.println("Cannot delete user of given id=" + id +", because that user is null");
         }
+    }
+    
+    public Users getUserById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Users u = (Users)session.load(Users.class, id);
+        logger.info("User has been retrieved succesfuly with id=" + id +", User=" + u);
+        System.out.println("User has been retrieved succesfuly with id=" + id +", User=" + u);
+        return u;
+    }
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Users> getAllUsers() {
+        Session session = sessionFactory.getCurrentSession();
+        Query sql = session.createQuery("From Users u");
+        System.out.println("TO JEST OLD QUERY" + sql);
+        List<Users> usersList = sql.list();
+        logger.info("List of users retrieved!");
+        System.out.println("List of users retrieved!");
+        return usersList;
+    }
+    @Override
+    public List<Users> getAllUsersNew() {
+        Session session = sessionFactory.getCurrentSession();
+        Query sql = session.createQuery("select new Users(u.id, u.login, u.active) from Users u order by u.id");
+        //sql.setParameter("login", "admin");
+        //sql.setParameter("active", false);
+        //sql.setBoolean(0, false);
+        System.out.println("TO JEST NEW QUERY" + sql);
+        List<Users> usersList = (List<Users>)sql.list();
+        return usersList;
     }
 }
