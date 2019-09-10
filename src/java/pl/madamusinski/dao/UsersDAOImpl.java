@@ -6,6 +6,7 @@
 package pl.madamusinski.dao;
 
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Query;
 
 import org.hibernate.Session;
@@ -33,6 +34,7 @@ public class UsersDAOImpl implements UsersDAO{
         return this.sessionFactory;
     }
     
+      @Override
     public void addUser(Users u) {
         Session session = sessionFactory.getCurrentSession();
         session.persist(u);
@@ -40,6 +42,7 @@ public class UsersDAOImpl implements UsersDAO{
         System.out.println("User has been added succesfuly, User=" + u);
     }
     
+      @Override
     public void editUser(Users u) {
         Session session = sessionFactory.getCurrentSession();
         session.update(u);
@@ -84,8 +87,13 @@ public class UsersDAOImpl implements UsersDAO{
     @Override
     public List<Users> getAllUsersNew() {
         Session session = sessionFactory.getCurrentSession();
-        Query sql = session.createQuery("select new Users(u.id, u.login, u.active) from Users u order by u.id");
+        //Query sql = session.createQuery("select new Users(u.id, u.login, u.active) from Users u join order by u.id");
         //Query sql2 = session.createSQLQuery("select * from users").addEntity(Users.class);
+        //Query sql = session.createQuery("FROM Users");
+        //Query sql = session.createQuery("select u.id, u.login, u.active, r.role from Users u JOIN u.roles r");
+        Query sql = session.createQuery("select new Users(u.id, u.login, u.active, new Roles(r.role)) From Users u Join u.roles r");
+        //Query sql = session.createSQLQuery("select u.id, u.login, u.password, u.active, r.role from users u join users_role ur on u.id = ur.id_users join role r on r.id = ur.id_role").addEntity(Users.class);
+        
         //sql.setParameter("login", "admin");
         //sql.setParameter("active", false);
         //sql.setBoolean(0, false);
@@ -93,4 +101,5 @@ public class UsersDAOImpl implements UsersDAO{
         List<Users> usersList = (List<Users>)sql.list();
         return usersList;
     }
+
 }

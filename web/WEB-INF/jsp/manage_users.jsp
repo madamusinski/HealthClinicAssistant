@@ -41,6 +41,7 @@
                    {"data":"id"},
                    {"data":"login"},
                    {"data":"active"},
+                   {"data":"role"},
                    {
                      "data":"edit",
                      "render" : function(data, type, row, meta) {
@@ -199,6 +200,7 @@
                                     <th>Id</th>
                                     <th>Login</th>
                                     <th>Aktywny</th>
+                                    <th>Rola</th>
                                     <th>Edytuj</th>
                                     <th>Usuń</th>                                 
                                 </tr>

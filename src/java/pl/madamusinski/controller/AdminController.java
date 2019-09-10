@@ -5,9 +5,13 @@
  */
 package pl.madamusinski.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import pl.madamusinski.model.Users;
+import pl.madamusinski.service.RolesService;
 import pl.madamusinski.service.UsersService;
 import pl.madamusinski.service.UsersServiceImpl;
 
@@ -38,6 +43,7 @@ public class AdminController {
     @Qualifier(value="usersService")
     private UsersService usersService;
     
+    
     public void setUsersService(UsersService usersService) {
         this.usersService = usersService;
     }
@@ -46,6 +52,17 @@ public class AdminController {
         return usersService;
     }
     
+    @Autowired(required=true)
+    @Qualifier(value="rolesService")
+    private RolesService rolesService;
+    
+    public void setRolesService(RolesService rolesService) {
+        this.rolesService = rolesService;
+    }
+    
+    public RolesService getRolesService() {
+        return rolesService;
+    }
      @RequestMapping(value="/admin", method=RequestMethod.GET)
     public ModelAndView admin(ModelAndView model) {
         
@@ -80,14 +97,20 @@ public class AdminController {
     @RequestMapping(value="/admin/manage_users/get_all_users_new_json", method=RequestMethod.GET
             , produces="application/json; charset=UTF-8")
     @ResponseBody
-    public List<Users> getAllUsersNew() {
+    public List<Users> getAllUsersNew() throws JsonProcessingException {
         logger.debug("Kontroler poprawnie zakonczył pobieranie użytkowników NEW");
         List<Users> list = usersService.getAllUsersNew();
-        for(Users u : list){
-            System.out.println(u.toString());
-        }
-        return usersService.getAllUsersNew();
         
+       
+        //Gson gson = new GsonBuilder().create();
+        //String sgson = gson.toJson(list);
+        //System.out.println("GSON !!! " + sgson);
+        //ObjectMapper mapper = new ObjectMapper();
+        //String json = mapper.writeValueAsString(list);
+        //System.out.println("JACKSON !!!!!" + json);
+    
+        return usersService.getAllUsersNew();
+        //return gson.toJson(sgson);
     }
     
     @ResponseStatus(HttpStatus.OK)

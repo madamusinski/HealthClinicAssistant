@@ -5,16 +5,23 @@
  */
 package pl.madamusinski.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
@@ -28,8 +35,32 @@ public class Roles implements Serializable{
     private int id;
     @Column(name="role", nullable=false)
     private String role;
-    @ManyToMany(mappedBy="roles")
+   /** @ManyToMany(mappedBy="roles",fetch=FetchType.LAZY)
     private Set<Users> users = new HashSet<>();
+    
+    public void setUsers(Set<Users> users) {
+        this.users = users;
+    }
+    
+    public Set<Users> getUsers() {
+        return users;
+    }*/
+    
+    @ManyToMany(cascade={CascadeType.MERGE},fetch = FetchType.EAGER)
+    @JoinTable(name="users_role",
+            joinColumns=@JoinColumn(name="id_role", referencedColumnName = "id"),
+            inverseJoinColumns=@JoinColumn(name="id_users", referencedColumnName="id"),
+            uniqueConstraints={@UniqueConstraint(columnNames={"id_users", "id_role"})})
+    @JsonBackReference
+    private List<Users> users;
+    
+    public List<Users> getUsers() {
+        return users;
+    }
+    public void setUsers(List<Users> users) {
+        this.users = users;
+    }
+    
       
     public Roles() {}
     

@@ -5,12 +5,15 @@
  */
 package pl.madamusinski.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +22,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
@@ -38,9 +42,11 @@ public class Users implements Serializable {
     private String password;
     @Column(name="active", nullable=false)
     private boolean active;
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name="users_role", joinColumns = {@JoinColumn(name="id_users")},
-            inverseJoinColumns = {@JoinColumn(name="id_role")})
+    /**
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JoinTable(name="users_role", joinColumns = @JoinColumn(name="id_users"),
+            inverseJoinColumns = @JoinColumn(name="id_role"))
+    
     private Set<Roles> roles = new HashSet<>();
     
     public Set<Roles> getRoles() {
@@ -49,6 +55,20 @@ public class Users implements Serializable {
     
     public void setRoles(Set<Roles> roles) {
         this.roles = roles;
+    }*/
+    
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(name="users_role", joinColumns = @JoinColumn(name="id_users", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name="id_role", referencedColumnName = "id"),
+            uniqueConstraints={@UniqueConstraint(columnNames={"id_users", "id_role"})})
+    @JsonManagedReference
+    private List<Roles> roles;
+    
+    public List<Roles> getRoles(){
+        return roles;
+    }
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
     }
     public Users() {}
     
@@ -56,11 +76,12 @@ public class Users implements Serializable {
         this.id = id;
         this.active = active;
     }
-    public Users(int id, String login, boolean active) {
+    public Users(int id, String login, boolean active, List<Roles> roles) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.active = active;
+        this.roles = roles;
     }
     
     public int getId() {
@@ -100,6 +121,7 @@ public class Users implements Serializable {
                + ", login=" + login
                //+ ", haslo=" + password
                + ", aktywny=" + active
+                + ", role=" + roles
                + "]";
     }
 }

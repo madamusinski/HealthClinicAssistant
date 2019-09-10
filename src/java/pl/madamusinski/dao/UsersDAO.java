@@ -6,6 +6,7 @@
 package pl.madamusinski.dao;
 
 import java.util.List;
+import java.util.Set;
 import pl.madamusinski.model.Users;
 
 /**
@@ -20,4 +21,5 @@ public interface UsersDAO {
     public Users getUserById(int id);
     public List<Users> getAllUsers();
     public List<Users> getAllUsersNew();
+
 }
