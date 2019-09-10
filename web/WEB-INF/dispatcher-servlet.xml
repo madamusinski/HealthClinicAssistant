@@ -29,6 +29,7 @@
              <beans:list>
                  <beans:value>pl.madamusinski.model.Users</beans:value>
                  <beans:value>pl.madamusinski.model.Wizyta</beans:value>
+                 <beans:value>pl.madamusinski.model.Roles</beans:value>
              </beans:list>
          </beans:property>
          <beans:property name="hibernateProperties">
@@ -53,7 +54,20 @@
          <beans:property name="usersDAO" ref="usersDAO"></beans:property>
      </beans:bean>
      
-     <!-- Definicja fasolki klasy WizytaDAO-->
+     <!-- Definicja fasolki klasy RolesDAO-->
+    
+     <beans:bean id="rolesDAO" class="pl.madamusinski.dao.RolesDAOImpl">
+         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+     </beans:bean>
+     
+     <!-- Definicja fasolki klasy RolesService-->
+    
+     <beans:bean id="rolesService" class="pl.madamusinski.service.RolesServiceImpl">
+         <beans:property name="rolesDAO" ref="rolesDAO"></beans:property>
+     </beans:bean>
+     
+     
+     <!-- Definicja fasolki klasy UsersDAO-->
     
      <beans:bean id="wizytaDAO" class="pl.madamusinski.dao.WizytaDAOImpl">
          <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />

@@ -46,7 +46,7 @@
                     <form:form action="" modelAttribute="" method="POST">
                         <input id="addId" type="hidden" path="id" name="id">
                                 <div class="md-form mb-4">
-                                    <form:hidden path="id" value="${}"></form:hidden>
+                                    <form:hidden path="id" value=""></form:hidden>
                                     <form:label path="dataWizyta">
                                         <spring:message text="Data:"/>
                                     </form:label>

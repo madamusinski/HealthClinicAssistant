@@ -47,6 +47,7 @@ public class UsersDAOImpl implements UsersDAO{
         System.out.println("User has been updated succesfuly, User=" + u);
     }
     
+      @Override
     public void deleteUser(int id) {
         Session session = sessionFactory.getCurrentSession();
         Users u = (Users)session.load(Users.class, id);
@@ -61,6 +62,7 @@ public class UsersDAOImpl implements UsersDAO{
         }
     }
     
+      @Override
     public Users getUserById(int id) {
         Session session = sessionFactory.getCurrentSession();
         Users u = (Users)session.load(Users.class, id);
@@ -83,6 +85,7 @@ public class UsersDAOImpl implements UsersDAO{
     public List<Users> getAllUsersNew() {
         Session session = sessionFactory.getCurrentSession();
         Query sql = session.createQuery("select new Users(u.id, u.login, u.active) from Users u order by u.id");
+        //Query sql2 = session.createSQLQuery("select * from users").addEntity(Users.class);
         //sql.setParameter("login", "admin");
         //sql.setParameter("active", false);
         //sql.setBoolean(0, false);

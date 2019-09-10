@@ -89,16 +89,16 @@ public class AdminController {
         return usersService.getAllUsersNew();
         
     }
-    @ResponseBody
+    
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value="/admin/manage_users/add_user", method=RequestMethod.POST
             , consumes="application/json; charset=UTF-8")
-    public void addUser(@RequestBody String form, ModelAndView m) {
+    public @ResponseBody String addUser(@RequestBody String form, ModelAndView m) {
        // logger.debug("Wchodze na strone dodawania uzytkownika");
         Gson gson = new GsonBuilder().create();
         Users u = gson.fromJson(form, Users.class);
         this.usersService.addUser(u);
         //m.addObject("title", "Dodawania użytkownika");
-       
+       return "Success";
     }
 }

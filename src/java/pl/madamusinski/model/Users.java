@@ -6,11 +6,17 @@
 package pl.madamusinski.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -32,7 +38,18 @@ public class Users implements Serializable {
     private String password;
     @Column(name="active", nullable=false)
     private boolean active;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name="users_role", joinColumns = {@JoinColumn(name="id_users")},
+            inverseJoinColumns = {@JoinColumn(name="id_role")})
+    private Set<Roles> roles = new HashSet<>();
     
+    public Set<Roles> getRoles() {
+        return roles;
+    }
+    
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
+    }
     public Users() {}
     
     public Users(int id, boolean active) {

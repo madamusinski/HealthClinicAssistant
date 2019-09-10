@@ -95,18 +95,21 @@
                   login : $("#addLogin").val(),
                   password : $("#addPassword").val()
               };
+              console.log(dane);
               $.ajax({
                  type: "POST",
                  contentType:"application/json; charset=utf-8",
-                 dataType: "json",
+                 //dataType: "json",
                  data: JSON.stringify(dane),
                  url: "${pageContext.request.contextPath}/admin/manage_users/add_user",
-                 success: function() {
-                     //$.modal.close();
-                     alert("Użytkownik dodany");
+                 success: function(response) {
+                     $('#addUser').modal('hide');
                      $('#table_id').DataTable().ajax.reload();
                      
-                 }
+                 },
+                         error: function(err) {
+                             console.log("blad "+err);
+                         }
               });
               
           });
