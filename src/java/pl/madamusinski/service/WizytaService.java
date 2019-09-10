@@ -15,4 +15,5 @@ import pl.madamusinski.model.Wizyta;
 
 public interface WizytaService {
     public List<Wizyta> getAllWizyta();
+    public void addWizyta(Wizyta w);
 }

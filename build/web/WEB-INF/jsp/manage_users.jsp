@@ -19,10 +19,14 @@
         <script type="text/javascript" language="javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
+          <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+         
+         <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
    </head>
     <!-- skrytpy -->
@@ -72,6 +76,40 @@
                         }
              }
            }); 
+           $('#addUserBtn').click(function(){
+            $('#addUser').modal();
+           });
+           
+           $('#edytujWizyta').click(function(){
+              $('#editWizyta').modal();
+           });
+           
+         /**  $('#addCzas').click(function(){
+               var test = $('#addCzas option:selected').text();
+               console.log(test);
+           });*/
+          $('#addUserForm').submit(function(event){
+              event.preventDefault();
+              var dane = {
+                  id : 0,
+                  login : $("#addLogin").val(),
+                  password : $("#addPassword").val()
+              };
+              $.ajax({
+                 type: "POST",
+                 contentType:"application/json; charset=utf-8",
+                 dataType: "json",
+                 data: JSON.stringify(dane),
+                 url: "${pageContext.request.contextPath}/admin/manage_users/add_user",
+                 success: function() {
+                     //$.modal.close();
+                     alert("Użytkownik dodany");
+                     $('#table_id').DataTable().ajax.reload();
+                     
+                 }
+              });
+              
+          });
         });
     </script>
     <body>
@@ -107,11 +145,50 @@
                 </li>
             </ul>
   </div>
+                
 </nav>
+                 <!--Okienko dodawania-->
+        <div class="container">
+            <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title">Dodaj Użytkownika</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            
+                        </div>
+                        <div class="modal-body mx-3">
+                            <form id="addUserForm"  accept-charset="UTF-8">    
+                                
+                                <input id="addId" type="hidden" name="id">
+                                <div class="md-form mb-4">
+                                <label for="addLogin" class="col-form-label">Podaj Login:</label>
+                                <br>
+                                <input id="addLogin" type="text" name="login" class="form-control">
+                                </div>
+                                <div class="md-form mb-4">
+                                <label for="addPassword" class="col-form-label">Podaj haslo:</label>
+                                <br>
+                                
+                                <input id="addPassword" type="password" name="password" class="form-control">
+                                
+                               </div>
+                                
+                                <br>
+                                <input class="btn btn-default" type="submit" value="Dodaj">
+                            </form>
+                            </div>
+                            <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <p>Witaj ${pageContext.request.userPrincipal.name}</p></c:if>
             <h1>Welcome to ${message}</h1>
                     <p>All users list:</p>
+                    <a class="btn btn-primary" id="addUserBtn" action="" href="#" role="button">Dodaj użytkownika</a>
                     <div>
                         <table id="table_id" class="display">
                             <thead>

@@ -50,4 +50,12 @@ public class WizytaDAOImpl implements WizytaDAO{
         System.out.println("Retrieving all wizyty");
         return listWizyta;
     }
+    
+    @Override
+    public void addWizyta(Wizyta w) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(w);
+        logger.debug("Saving new wizyta=" + w);
+        System.out.println("Saving new wizyta=" + w);
+    }
 }

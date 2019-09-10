@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/maadamusinski/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/controller/PatientController.java</file>
             <file>file:/C:/Users/maadamusinski/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/model/Users.java</file>
             <file>file:/C:/Users/maadamusinski/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/manage_users.jsp</file>
@@ -29,6 +30,38 @@
             <file>file:/C:/Users/maadamusinski/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/user_panel.jsp</file>
             <file>file:/C:/Users/maadamusinski/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/dao/UsersDAOImpl.java</file>
             <file>file:/C:/Users/maadamusinski/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/controller/HomeController.java</file>
+=======
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/model/Wizyta.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/model/Users.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/controller/PatientController.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/wizyty.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/user.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/login_error.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/dodaj_wizyta.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/dao/WizytaDAOImpl.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/service/WizytaService.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/dispatcher-servlet.xml</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/admin.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/service/WizytaServiceImpl.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/security.xml</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/controller/AdminController.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/dao/UsersDAO.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/manage_users.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/access_denied.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/applicationContext.xml</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/controller/HomeController.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/dao/UsersDAOImpl.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/user_panel.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/service/UsersService.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/controller/UserController.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/controller/LoginController.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/login.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/dao/WizytaDAO.java</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/add_user.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/web/WEB-INF/jsp/index.jsp</file>
+            <file>file:/C:/Users/Mateusz/Documents/NetBeansProjects/HealthClinicAssistant/src/java/pl/madamusinski/service/UsersServiceImpl.java</file>
+>>>>>>> 97090c0e6d92163dcfb9d221bff4346fcdf8fcfb
         </group>
     </open-files>
 </project-private>
