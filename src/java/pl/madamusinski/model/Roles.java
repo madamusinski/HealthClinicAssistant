@@ -32,7 +32,7 @@ import javax.persistence.UniqueConstraint;
 public class Roles implements Serializable{
     @Id @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private int idr;
     @Column(name="role", nullable=false)
     private String role;
    /** @ManyToMany(mappedBy="roles",fetch=FetchType.LAZY)
@@ -64,17 +64,17 @@ public class Roles implements Serializable{
       
     public Roles() {}
     
-    public Roles(int id, String role) {
-        this.id = id;
+    public Roles(int idr, String role) {
+        this.idr = idr;
         this.role = role;
     }
 
     public int getId() {
-        return id;
+        return idr;
     }
     
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idr) {
+        this.idr = idr;
     }
     
     public String getLogin() {
@@ -87,7 +87,7 @@ public class Roles implements Serializable{
     
    
     public String toString(){
-        return "[id=" + id
+        return "[id=" + idr
                + ", role=" + role
                + "]";
     }

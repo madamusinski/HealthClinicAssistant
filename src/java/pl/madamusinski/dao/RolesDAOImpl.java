@@ -32,6 +32,7 @@ public class RolesDAOImpl implements RolesDAO{
     public SessionFactory getSessionFactory() {
         return this.sessionFactory;
     }
+   
     
     @Override
     public void addRole(Roles r) {

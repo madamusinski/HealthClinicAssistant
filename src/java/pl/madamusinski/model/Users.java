@@ -70,19 +70,20 @@ public class Users implements Serializable {
     public void setRoles(List<Roles> roles) {
         this.roles = roles;
     }
+
     public Users() {}
     
     public Users(int id, boolean active) {
         this.id = id;
         this.active = active;
     }
-    public Users(int id, String login, boolean active, List<Roles> roles) {
+    public Users(int id, String login, boolean active) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.active = active;
-        this.roles = roles;
     }
+ 
     
     public int getId() {
         return id;

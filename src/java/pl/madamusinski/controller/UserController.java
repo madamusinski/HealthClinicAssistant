@@ -6,10 +6,15 @@
 package pl.madamusinski.controller;
 
 import java.util.List;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +44,9 @@ public class UserController {
     public WizytaService getWizytaService() {
         return wizytaService;
     }
+    static final String mailFromRecipient = "healthclinicassistant.noreply@gmail.com";
+    @Autowired
+    private JavaMailSender mailSender;
     
     @RequestMapping(value="/user", method=RequestMethod.GET)
     public ModelAndView user(ModelAndView model) {
@@ -74,5 +82,38 @@ public class UserController {
             , consumes="application/json; charset=UTF-8")
     public void addWizyta(@RequestBody Wizyta w) {
         
+    }
+    
+    @RequestMapping(value="/user/email_to_patient", method=RequestMethod.GET)
+    public ModelAndView emailForm(ModelAndView m) {
+        m.addObject("title", "Wiadomość mail");
+        m.addObject("message", "Wysyłanie wiadomości e-mail");
+        m.addObject("message2", "Wprowadź adres odbiorcy, temat oraz wiadomość");
+        m.setViewName("email_to_patient");
+        return m;
+    }
+    
+    @RequestMapping(value="/user/send_email", method=RequestMethod.POST)
+    public ModelAndView sendEmailToPatient(HttpServletRequest request, ModelAndView m) {
+        String mailToRecipient = request.getParameter("mailTo");
+        String mailSubject = request.getParameter("mailSubject");
+        String mailMessage = request.getParameter("mailMessage");
+        
+        
+        System.out.println("\nReceipient?= " + mailToRecipient + ", Subject?= " + mailSubject + ", Message?= " + mailMessage + "\n");
+        
+        mailSender.send(new MimeMessagePreparator(){
+            public void prepare(MimeMessage mimeMessage) throws Exception {
+                MimeMessageHelper mimeMsgHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+                mimeMsgHelper.setTo(mailToRecipient);
+                mimeMsgHelper.setFrom(mailFromRecipient);
+                mimeMsgHelper.setText(mailMessage);
+                mimeMsgHelper.setSubject(mailSubject);
+            }
+            
+        });
+        System.out.println("\nMessage Send Successfully.... Hurrey!\n");
+        m.setViewName("email_sent");
+        return m;
     }
 }

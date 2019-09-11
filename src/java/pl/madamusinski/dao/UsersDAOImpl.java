@@ -84,6 +84,7 @@ public class UsersDAOImpl implements UsersDAO{
         System.out.println("List of users retrieved!");
         return usersList;
     }
+    
     @Override
     public List<Users> getAllUsersNew() {
         Session session = sessionFactory.getCurrentSession();
@@ -91,7 +92,7 @@ public class UsersDAOImpl implements UsersDAO{
         //Query sql2 = session.createSQLQuery("select * from users").addEntity(Users.class);
         //Query sql = session.createQuery("FROM Users");
         //Query sql = session.createQuery("select u.id, u.login, u.active, r.role from Users u JOIN u.roles r");
-        Query sql = session.createQuery("select new Users(u.id, u.login, u.active, new Roles(r.role)) From Users u Join u.roles r");
+        Query sql = session.createQuery("select new Users(u.id, u.login, u.active) From Users u Join u.roles r");
         //Query sql = session.createSQLQuery("select u.id, u.login, u.password, u.active, r.role from users u join users_role ur on u.id = ur.id_users join role r on r.id = ur.id_role").addEntity(Users.class);
         
         //sql.setParameter("login", "admin");
